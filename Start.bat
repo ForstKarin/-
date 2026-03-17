@@ -1,0 +1,1 @@
+"C:\Program Files\Zulu\zulu-21\bin\java.exe" java -Dfile.encoding=UTF-8 -jar test.jar
