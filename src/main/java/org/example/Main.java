@@ -2,103 +2,110 @@ package org.example;
 
 import java.util.Scanner;
 
+import static org.example.Character.*;
+
 public class Main {
     public static void main(String[] args) {
-        // 创建三个角色
-        Character slime = new Character("1");
-        slime.sethp(50);
-        slime.setmp(0);
-        slime.setattack(10);
-        slime.setdefense(5);
-        slime.setspeed(3);
-        slime.setluck(2);
-        slime.setexp(10);
-        slime.setlevel(1);
-        slime.setgold(5);
-        slime.setmaxHp(50);
-        slime.setmaxMp(0);
-        slime.setmaxExp(100);
-        slime.setmaxLevel(10);
-        slime.setmaxGold(100);
+        Character Character1 = new Character("Smile");
+        Character1.SetLevel(2);
+        Character1.SetEXP(100);
+        Character1.SetHP(15);
+        Character1.SetMP(5);
+        Character1.SetMaxHP(15);
+        Character1.SetMaxMP(5);
+        Character1.SetMaxLevel(10);
+        Character1.SetmaxEXP(200);
+        Character1.SetSpeed(3);
+        Character1.SetAttack(2);
+        Character1.SetDefense(5);
+        Character1.SetMoney(0);
 
-        Character fireMage = new Character("2");
-        fireMage.sethp(80);
-        fireMage.setmp(100);
-        fireMage.setattack(12);
-        fireMage.setdefense(8);
-        fireMage.setspeed(10);
-        fireMage.setluck(8);
-        fireMage.setexp(20);
-        fireMage.setlevel(1);
-        fireMage.setgold(20);
-        fireMage.setmaxHp(80);
-        fireMage.setmaxMp(200);
-        fireMage.setmaxExp(150);
-        fireMage.setmaxLevel(10);
-        fireMage.setmaxGold(200);
+        Character Character2 = new Character("FireMage");
+        Character2.SetLevel(8);
+        Character2.SetEXP(100);
+        Character2.SetHP(10);
+        Character2.SetMP(20);
+        Character2.SetMaxHP(10);
+        Character2.SetMaxMP(20);
+        Character2.SetMaxLevel(80);
+        Character2.SetmaxEXP(150);
+        Character2.SetSpeed(5);
+        Character2.SetAttack(4);
+        Character2.SetDefense(1);
+        Character2.SetMoney(50);
 
-        Character stoneGolem = new Character("3");
-        stoneGolem.sethp(120);
-        stoneGolem.setmp(0);
-        stoneGolem.setattack(8);
-        stoneGolem.setdefense(20);
-        stoneGolem.setspeed(2);
-        stoneGolem.setluck(3);
-        stoneGolem.setexp(15);
-        stoneGolem.setlevel(1);
-        stoneGolem.setgold(10);
-        stoneGolem.setmaxHp(120);
-        stoneGolem.setmaxMp(0);
-        stoneGolem.setmaxExp(120);
-        stoneGolem.setmaxLevel(10);
-        stoneGolem.setmaxGold(150);
+        Character Character3 = new Character("StoneGolem");
+        Character3.SetLevel(5);
+        Character3.SetEXP(50);
+        Character3.SetHP(25);
+        Character3.SetMP(10);
+        Character3.SetMaxHP(25);
+        Character3.SetMaxMP(10);
+        Character3.SetMaxLevel(50);
+        Character3.SetmaxEXP(120);
+        Character3.SetSpeed(1);
+        Character3.SetAttack(8);
+        Character3.SetDefense(8);
+        Character3.SetMoney(0);
 
-        // 存储角色
-        Character[] characters = {slime, fireMage, stoneGolem};
+        Character QianXue = new Character("QianXue");
+        QianXue.SetLevel(100);
+        QianXue.SetEXP(999999);
+        QianXue.SetHP(2147483647);
+        QianXue.SetMP(2147483647);
+        QianXue.SetMaxHP(2147483647);
+        QianXue.SetMaxMP(2147483647);
+        QianXue.SetMaxLevel(100);
+        QianXue.SetmaxEXP(999999);
+        QianXue.SetSpeed(2147483647);
+        QianXue.SetAttack(2147483647);
+        QianXue.SetDefense(2147483647);
+        QianXue.SetMoney(2147483647);
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("查询角色信息");
-        System.out.println("可查询的角色：1、2、3");
-        System.out.println("请输入名称（输入 exit 退出）：");
+        //角色数据库
+        Character[] Characters = {Character1, Character2, Character3, QianXue};
 
-        while (true) {
-            System.out.print("> ");
-            String input = scanner.nextLine().trim();
-            if (input.equalsIgnoreCase("exit")) {
-                System.out.println("退出。");
+        Scanner Scanner = new Scanner(System.in);
+        System.out.println("在此查询角色信息！");
+        System.out.println("史莱姆（Smile）、火魔法师(FireMage)、石像(StoneGolem)");
+        System.out.println("请输入角色名称（输入Q退出）：");
+
+
+    while (true) {
+        System.out.print(">> ");
+        String input = Scanner.nextLine().trim();
+        if (input.equalsIgnoreCase("Q")) {
+            System.out.println("退出程序。");
+            break;
+        }
+        Character found = null;
+        for (Character c : Characters) {
+            if (c.name.equalsIgnoreCase(input)) {
+                found = c;
                 break;
             }
-
-            // 查找匹配的角色
-            Character found = null;
-            for (Character c : characters) {
-                if (c.name.equalsIgnoreCase(input)) {
-                    found = c;
-                    break;
-                }
-            }
-
-            if (found == null) {
-                System.out.println("未找到角色：" + input + "，请重新输入。");
-            } else {
-                printCharacterInfo(found);
-            }
         }
-        scanner.close();
+        if (found == null) {
+            System.out.println("未找到角色：" + input + "，请重新输入。");
+        }
+        else {
+            CharacterInfo(found);
+        }
+    }
+        Scanner.close();
     }
 
-    // 数据展示
-    public static void printCharacterInfo(Character c) {
-        System.out.println("========== " + c.name + " 的属性 ==========");
-        System.out.println("HP: " + c.hp + "/" + c.maxHp);
-        System.out.println("MP: " + c.mp + "/" + c.maxMp);
-        System.out.println("攻击: " + c.attack);
-        System.out.println("防御: " + c.defense);
-        System.out.println("速度: " + c.speed);
-        System.out.println("幸运: " + c.luck);
-        System.out.println("经验: " + c.exp + "/" + c.maxExp);
-        System.out.println("等级: " + c.level + "/" + c.maxLevel);
-        System.out.println("金币: " + c.gold + "/" + c.maxGold);
+    public static void CharacterInfo(Character c) {
+        System.out.println("============== " + c.name + " ================");
+        System.out.println("HP: " + c.HP + "/" + c.Max_MP);
+        System.out.println("MP: " + c.MP + "/" + c.Max_MP);
+        System.out.println("攻击: " + c.Attack);
+        System.out.println("防御: " + c.Defense);
+        System.out.println("速度: " + c.Speed);
+        System.out.println("幸运: " + c.Luck);
+        System.out.println("经验: " + c.EXP + "/" + c.Max_EXP);
+        System.out.println("等级: " + c.Level + "/" + c.Max_Level);
+        System.out.println("金币: " + c.Money);
         System.out.println("=====================================");
     }
 }
